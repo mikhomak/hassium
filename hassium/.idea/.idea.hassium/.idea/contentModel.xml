@@ -4,14 +4,19 @@
     <e p="B:\Documents\Unity Projects\hassium\hassium" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="General" t="Include">
+          <e p="InputManager.cs" t="Include" />
+        </e>
         <e p="Player" t="Include">
           <e p="Scripts" t="Include">
             <e p="GroundMovement.cs" t="Include" />
             <e p="IMovement.cs" t="Include" />
-            <e p="InputManager.cs" t="Include" />
             <e p="PlayerController.cs" t="Include" />
             <e p="PlayerMovement.cs" t="Include" />
           </e>
+        </e>
+        <e p="Util" t="Include">
+          <e p="AnimatorManager.cs" t="Include" />
         </e>
       </e>
       <e p="hassium.sln" t="IncludeFlat" />

@@ -1,11 +1,9 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GroundMovement : IMovement {
-
     private Rigidbody rigidbody;
-    private float speed = 10f;
-    
+    private float speed;
+
     public GroundMovement(Rigidbody rigidbody) {
         this.rigidbody = rigidbody;
     }
@@ -20,6 +18,10 @@ public class GroundMovement : IMovement {
     }
 
     public void movement(float horInput, float verInput) {
-        rigidbody.velocity = new Vector3(horInput,0,verInput) * speed;
+        rigidbody.AddForce(new Vector3(horInput, 0, verInput) * speed);
+    }
+
+    public void setSpeed(float speed) {
+        this.speed = speed;
     }
 }
