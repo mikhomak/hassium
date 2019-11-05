@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour {
     [Range(-1, 1)] [SerializeField] private float verInput;
 
     [Header("References")] [SerializeField]
-    private new Rigidbody rigidbody;
+    private Rigidbody rigidbody;
 
     [SerializeField] private IMovement movement;
     [SerializeField] private AnimatorManager animatorManager;
