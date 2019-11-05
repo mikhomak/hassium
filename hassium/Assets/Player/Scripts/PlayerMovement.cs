@@ -4,6 +4,7 @@ public class PlayerMovement : MonoBehaviour {
     [Header("Stats")] [SerializeField] public float speed;
     [Range(-1, 1)] [SerializeField] private float horInput;
     [Range(-1, 1)] [SerializeField] private float verInput;
+    [SerializeField] private bool lockOn;
 
     [Header("References")] [SerializeField]
     private Rigidbody rigidbody;
