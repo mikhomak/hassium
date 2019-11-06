@@ -8,6 +8,7 @@ public class AnimatorManager : MonoBehaviour {
     private Animator animator;
     private static readonly int HorInput = Animator.StringToHash("horInput");
     private static readonly int VerInput = Animator.StringToHash("verInput");
+    private static readonly int LockOn = Animator.StringToHash("lockOn");
 
     private void Start() {
         animator = GetComponentInChildren<Animator>();
@@ -20,6 +21,10 @@ public class AnimatorManager : MonoBehaviour {
     public void updateMovementParameters(float hor, float ver) {
         animator.SetFloat(VerInput, ver);
         animator.SetFloat(HorInput, hor);
+    }
+
+    public void setLockOn() {
+        animator.SetTrigger(LockOn);
     }
 
 

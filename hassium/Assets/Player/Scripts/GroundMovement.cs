@@ -1,45 +1,55 @@
-﻿using UnityEngine;
+﻿using Player.Scripts;
+using UnityEngine;
 
-public class GroundMovement : IMovement {
-    private Rigidbody rigidbody;
-    private float speed;
-    private bool lockOn;
-
-    public GroundMovement(Rigidbody rigidbody) {
+public class GroundMovement : AMovement {
+    public GroundMovement(Rigidbody rigidbody, Camera camera) {
         this.rigidbody = rigidbody;
+        this.camera = camera;
     }
 
-    public GroundMovement(Rigidbody rigidbody, float speed) {
+    public GroundMovement(Transform transform, Rigidbody rigidbody, Camera camera, float speed) {
         this.rigidbody = rigidbody;
         this.speed = speed;
+        this.camera = camera;
+        this.transform = transform;
     }
 
-    public void movement(Vector2 input) {
-        movement(input.x, input.y);
-    }
-
-    public void movement(float horInput, float verInput) {
+    public override void movement() {
         if (lockOn) {
-            lockOnMovement(horInput, verInput);
+            lockOnMovement();
         }
         else {
-            normalMovement(horInput, verInput);
+            normalMovement();
         }
     }
 
-    private void lockOnMovement(float horInput, float verInput) {
-        rigidbody.AddForce(new Vector3(horInput, 0, verInput) * speed);
+    private void lockOnMovement() {
+        normalMovement();
     }
 
-    private void normalMovement(float horInput, float verInput) {
-        
+    private void normalMovement() {
+        float minSpeedToMove = new Vector2(horInput, verInput).sqrMagnitude;
+        if (minSpeedToMove > allowPlayerRotation) {
+            moveAndRotate();
+        }
+        else if (minSpeedToMove < allowPlayerRotation) {
+        }
     }
 
-    public void setSpeed(float speed) {
-        this.speed = speed;
-    }
+    private void moveAndRotate() {
+        Vector3 forward = camera.transform.forward;
+        Vector3 right = camera.transform.right;
 
-    public void setLockOn(bool lockOn) {
-        this.lockOn = lockOn;
+        forward.y = 0f;
+        right.y = 0f;
+
+        forward.Normalize();
+        right.Normalize();
+
+        Vector3 desiredMoveDirection = forward * verInput + right * horInput;
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection),
+            desiredRotationSpeed);
+        rigidbody.AddForce(desiredMoveDirection.normalized * speed);
     }
 }

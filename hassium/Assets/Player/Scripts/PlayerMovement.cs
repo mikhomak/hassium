@@ -9,20 +9,28 @@ public class PlayerMovement : MonoBehaviour {
     [Header("References")] [SerializeField]
     private Rigidbody rigidbody;
 
+    [SerializeField] private Camera camera;
+
     [SerializeField] private IMovement movement;
     [SerializeField] private AnimatorManager animatorManager;
 
 
     private void Start() {
+        setUpReferences();
+        movement = new GroundMovement(transform, rigidbody, camera, speed);
+    }
+
+    private void setUpReferences() {
         rigidbody = GetComponent<Rigidbody>();
         animatorManager = GetComponent<AnimatorManager>();
-        movement = new GroundMovement(rigidbody, speed);
+        camera = Camera.main;
     }
 
 
     private void FixedUpdate() {
         Vector2 input = InputManager.instance.getAxisInputs();
-        movement.movement(input);
+        movement.setInputs(input);
+        movement.movement();
         animatorManager.updateMovementParameters(input);
         setInputs(input);
     }
