@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private bool lockOn;
 
     [Header("References")] [SerializeField]
-    private Rigidbody rigidbody;
+    private CharacterController characterController;
 
     [SerializeField] private Camera camera;
 
@@ -17,11 +17,11 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Start() {
         setUpReferences();
-        movement = new GroundMovement(transform, rigidbody, camera, speed);
+        movement = new GroundMovement(transform, characterController, camera, speed);
     }
 
     private void setUpReferences() {
-        rigidbody = GetComponent<Rigidbody>();
+        characterController = GetComponent<CharacterController>();
         animatorManager = GetComponent<AnimatorManager>();
         camera = Camera.main;
     }

@@ -2,13 +2,15 @@
 using UnityEngine;
 
 public class GroundMovement : AMovement {
-    public GroundMovement(Rigidbody rigidbody, Camera camera) {
-        this.rigidbody = rigidbody;
-        this.camera = camera;
-    }
+    private bool repeatDirection = false;
+    private Vector3 repeatDirectionVector;
+    private Vector3 oldForwardDirectionVector;
+    private Vector3 oldRightDirectionVector;
+    private float oldRightDirection;
 
-    public GroundMovement(Transform transform, Rigidbody rigidbody, Camera camera, float speed) {
-        this.rigidbody = rigidbody;
+
+    public GroundMovement(Transform transform, CharacterController characterController, Camera camera, float speed) {
+        this.characterController = characterController;
         this.speed = speed;
         this.camera = camera;
         this.transform = transform;
@@ -39,17 +41,51 @@ public class GroundMovement : AMovement {
     private void moveAndRotate() {
         Vector3 forward = camera.transform.forward;
         Vector3 right = camera.transform.right;
-
         forward.y = 0f;
         right.y = 0f;
-
         forward.Normalize();
         right.Normalize();
+        Vector3 desiredMoveDirection = findDesiredMoveDirection(forward, right);
+        if (verInput > 0) {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection),
+                desiredRotationSpeed);
+        }
 
-        Vector3 desiredMoveDirection = forward * verInput + right * horInput;
+        characterController.Move(speed * Time.deltaTime * desiredMoveDirection);
+    }
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection),
-            desiredRotationSpeed);
-        rigidbody.AddForce(desiredMoveDirection.normalized * speed);
+    private Vector3 findDesiredMoveDirection(Vector3 forward, Vector3 right) {
+        Vector3 direction;
+        if (verInput > 0 && horInput == 0) {
+            direction = forward * verInput + right * horInput;
+
+            repeatDirection = false;
+        }
+        else if ((verInput > 0 && horInput != 0)) {
+            if (repeatDirection == false) {
+                direction = forward * verInput + right * horInput;
+                repeatDirection = true;
+                repeatDirectionVector = direction;
+            }
+            else {
+                direction = repeatDirectionVector;
+            }
+        }
+        else if ((verInput == 0 && horInput != 0) || (verInput < 0 && horInput == 0)) {
+            if (repeatDirection == false) {
+                oldRightDirection = horInput;
+                re = forward
+                oldForwardDirectionVector = forward;
+                oldRightDirectionVector = right;
+            }
+            else {
+                direction = repeatDirectionVector;
+            }
+        }
+        else {
+            direction = forward * verInput + right * horInput;
+        }
+
+        return direction;
     }
 }
