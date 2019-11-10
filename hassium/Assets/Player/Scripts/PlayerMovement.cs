@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 
+
+[RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour {
     [Header("Stats")] [SerializeField] public float speed;
     [Range(-1, 1)] [SerializeField] private float horInput;
     [Range(-1, 1)] [SerializeField] private float verInput;
     [SerializeField] private bool lockOn;
 
-    [Header("References")] [SerializeField]
+    [Header("References")] [SerializeField] 
     private CharacterController characterController;
 
     [SerializeField] private Camera camera;
@@ -17,12 +19,12 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Start() {
         setUpReferences();
-        movement = new GroundMovement(transform, characterController, camera, speed);
+        movement = new GroundMovement(transform, characterController, camera, animatorManager ,speed);
     }
 
     private void setUpReferences() {
         characterController = GetComponent<CharacterController>();
-        animatorManager = GetComponent<AnimatorManager>();
+        animatorManager = GetComponentInChildren<AnimatorManager>();
         camera = Camera.main;
     }
 

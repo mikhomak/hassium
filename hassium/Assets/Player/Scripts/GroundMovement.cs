@@ -3,17 +3,16 @@ using UnityEngine;
 
 public class GroundMovement : AMovement {
     private bool repeatDirection = false;
-    private Vector3 repeatDirectionVector;
     private Vector3 oldForwardDirectionVector;
     private Vector3 oldRightDirectionVector;
-    //private float oldRightDirection;
 
 
-    public GroundMovement(Transform transform, CharacterController characterController, Camera camera, float speed) {
+    public GroundMovement(Transform transform, CharacterController characterController, Camera camera, AnimatorManager animatorManager,float speed) {
         this.characterController = characterController;
         this.speed = speed;
         this.camera = camera;
         this.transform = transform;
+        this.animatorManager = animatorManager;
     }
 
     public override void movement() {
@@ -58,7 +57,6 @@ public class GroundMovement : AMovement {
         Vector3 direction;
         if (verInput > 0 && horInput == 0) {
             direction = forward * verInput + right * horInput;
-
             repeatDirection = false;
         }
         else{
@@ -69,8 +67,12 @@ public class GroundMovement : AMovement {
                 oldRightDirectionVector = right;
             }
             else {
+                animatorManager.lockHeadRotation();
                 direction = oldForwardDirectionVector * verInput + oldRightDirectionVector * horInput;
             }
+        }
+        if (horInput == 0 && verInput == 0) {
+            repeatDirection = false;
         }
 
         return direction;

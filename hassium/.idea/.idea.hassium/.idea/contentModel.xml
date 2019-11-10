@@ -10,6 +10,7 @@
         <e p="Player" t="Include">
           <e p="Scripts" t="Include">
             <e p="AMovement.cs" t="Include" />
+            <e p="ForwardVectorHeadRotation.cs" t="Include" />
             <e p="GroundMovement.cs" t="Include" />
             <e p="IMovement.cs" t="Include" />
             <e p="PlayerController.cs" t="Include" />

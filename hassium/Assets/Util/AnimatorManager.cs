@@ -6,6 +6,7 @@ public class AnimatorManager : MonoBehaviour {
 
 
     private Animator animator;
+    [SerializeField] private Transform forwardVector;
     private static readonly int HorInput = Animator.StringToHash("horInput");
     private static readonly int VerInput = Animator.StringToHash("verInput");
     private static readonly int LockOn = Animator.StringToHash("lockOn");
@@ -23,9 +24,12 @@ public class AnimatorManager : MonoBehaviour {
         animator.SetFloat(HorInput, hor);
     }
 
-    public void setLockOn() {
-        animator.SetTrigger(LockOn);
+    public void lockHeadRotation() {
+        
     }
 
-
+    private void OnAnimatorIK(int layerIndex) {
+        animator.SetLookAtWeight(100);
+        animator.SetLookAtPosition(forwardVector.position);
+    }
 }

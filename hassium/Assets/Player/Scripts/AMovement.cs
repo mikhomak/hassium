@@ -7,8 +7,11 @@ namespace Player.Scripts {
         protected bool lockOn = true;
         protected float allowPlayerRotation = 0.1f;
         protected float desiredRotationSpeed = 0.1f;
+        
+        /* References */
         protected CharacterController characterController;
         protected Camera camera;
+        protected AnimatorManager animatorManager;
         protected Transform transform;
 
         public virtual void movement() {
