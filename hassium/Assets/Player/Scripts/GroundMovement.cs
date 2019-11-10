@@ -6,7 +6,7 @@ public class GroundMovement : AMovement {
     private Vector3 repeatDirectionVector;
     private Vector3 oldForwardDirectionVector;
     private Vector3 oldRightDirectionVector;
-    private float oldRightDirection;
+    //private float oldRightDirection;
 
 
     public GroundMovement(Transform transform, CharacterController characterController, Camera camera, float speed) {
@@ -61,29 +61,16 @@ public class GroundMovement : AMovement {
 
             repeatDirection = false;
         }
-        else if ((verInput > 0 && horInput != 0)) {
+        else{
             if (repeatDirection == false) {
                 direction = forward * verInput + right * horInput;
                 repeatDirection = true;
-                repeatDirectionVector = direction;
-            }
-            else {
-                direction = repeatDirectionVector;
-            }
-        }
-        else if ((verInput == 0 && horInput != 0) || (verInput < 0 && horInput == 0)) {
-            if (repeatDirection == false) {
-                oldRightDirection = horInput;
-                re = forward
                 oldForwardDirectionVector = forward;
                 oldRightDirectionVector = right;
             }
             else {
-                direction = repeatDirectionVector;
+                direction = oldForwardDirectionVector * verInput + oldRightDirectionVector * horInput;
             }
-        }
-        else {
-            direction = forward * verInput + right * horInput;
         }
 
         return direction;
