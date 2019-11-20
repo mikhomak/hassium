@@ -13,6 +13,7 @@ namespace Player.Scripts {
         protected Camera camera;
         protected AnimatorManager animatorManager;
         protected Transform transform;
+        protected Transform lockOnTargetPosition;
 
         public virtual void movement() {
         }
@@ -32,6 +33,10 @@ namespace Player.Scripts {
 
         public void setInputs(Vector2 input) {
             setInputs(input.x, input.y);
+        }
+
+        public void setLockOnTargetPosition(Transform lockOnTargetPosition) {
+            this.lockOnTargetPosition = lockOnTargetPosition;
         }
     }
 }

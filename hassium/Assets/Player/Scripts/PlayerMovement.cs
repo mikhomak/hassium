@@ -2,8 +2,7 @@
 
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerMovement : MonoBehaviour
-{
+public class PlayerMovement : MonoBehaviour {
     [Header("Stats")] [SerializeField] public float speed;
     [Range(-1, 1)] [SerializeField] private float horInput;
     [Range(-1, 1)] [SerializeField] private float verInput;
@@ -13,27 +12,24 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController characterController;
 
     [SerializeField] private Camera camera;
-
+    [SerializeField] private GameObject lockOnTarget;
     [SerializeField] private IMovement movement;
     [SerializeField] private AnimatorManager animatorManager;
 
 
-    private void Start()
-    {
+    private void Awake() {
         setUpReferences();
         movement = new GroundMovement(transform, characterController, camera, animatorManager, speed);
     }
 
-    private void setUpReferences()
-    {
+    private void setUpReferences() {
         characterController = GetComponent<CharacterController>();
         animatorManager = GetComponentInChildren<AnimatorManager>();
         camera = Camera.main;
     }
 
 
-    private void FixedUpdate()
-    {
+    private void FixedUpdate() {
         Vector2 input = InputManager.instance.getAxisInputs();
         movement.setInputs(input);
         movement.movement();
@@ -41,9 +37,18 @@ public class PlayerMovement : MonoBehaviour
         setInputs(input);
     }
 
-    private void setInputs(Vector2 inputs)
-    {
+    private void setInputs(Vector2 inputs) {
         horInput = inputs.x;
         verInput = inputs.y;
+    }
+
+    public void setLockOnTarget(GameObject target) {
+        lockOnTarget = target;
+        movement.setLockOnTargetPosition(target.transform);
+    }
+
+    public void setLockOn(bool lockOn) {
+        this.lockOn = lockOn;
+        movement.setLockOn(lockOn);
     }
 }

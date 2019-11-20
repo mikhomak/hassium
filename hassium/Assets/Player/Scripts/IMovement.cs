@@ -7,4 +7,5 @@ public interface IMovement
     void setLockOn(bool lockOn);
     void setInputs(float horInput, float verInput);
     void setInputs(Vector2 input);
+    void setLockOnTargetPosition(Transform lockOnTargetPosition);
 }
