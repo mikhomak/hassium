@@ -4,7 +4,7 @@ namespace Player.Scripts {
     public class AMovement : IMovement {
         protected float horInput, verInput;
         protected float speed;
-        protected bool lockOn = true;
+        protected bool lockOn = false;
         protected readonly float allowPlayerRotation = 0.1f;
         protected readonly float desiredRotationSpeed = 0.1f;
 

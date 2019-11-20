@@ -19,26 +19,26 @@ public class GroundMovement : AMovement {
     }
 
     public override void movement() {
-        if (lockOn) {
-            lockOnMovement();
-        }
-        else {
-            normalMovement();
-        }
-    }
-
-    private void lockOnMovement() {
-        normalMovement();
-    }
-
-    private void normalMovement() {
         float minSpeedToMove = new Vector2(horInput, verInput).sqrMagnitude;
         if (minSpeedToMove > allowPlayerRotation) {
-            moveAndRotate();
+            if (lockOn) {
+                lockOnMovement();
+            }
+            else {
+                normalMovement();
+            }
         }
         else {
             repeatDirection = false;
         }
+    }
+
+    private void lockOnMovement() {
+        
+    }
+
+    private void normalMovement() {
+        moveAndRotate();
     }
 
     private void moveAndRotate() {
