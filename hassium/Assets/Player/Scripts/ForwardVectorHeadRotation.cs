@@ -1,8 +1,8 @@
 ﻿using System;
 using UnityEngine;
 
-public class ForwardVectorHeadRotation : MonoBehaviour {
-
+public class ForwardVectorHeadRotation : MonoBehaviour
+{
     private float horInput;
     private float verInput;
     private Vector3 oldDirection;
@@ -10,22 +10,25 @@ public class ForwardVectorHeadRotation : MonoBehaviour {
     private Camera camera;
     private bool repeatedDirection = false;
 
-    void Start() {
+    void Start()
+    {
         camera = Camera.main;
     }
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         Vector2 inputs = new Vector2();
         horInput = inputs.x;
         verInput = inputs.y;
 
-        if (verInput > 0 || horInput != 0) {
-            if (repeatedDirection == false) {
-                
+        if (verInput > 0 || horInput != 0)
+        {
+            if (repeatedDirection == false)
+            {
                 repeatedDirection = true;
             }
-            else {
-                
+            else
+            {
             }
         }
     }

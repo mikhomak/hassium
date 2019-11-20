@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public interface IMovement {
+public interface IMovement
+{
     void movement();
     void setSpeed(float speed);
     void setLockOn(bool lockOn);

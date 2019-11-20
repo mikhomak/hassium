@@ -2,13 +2,14 @@
 
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour
+{
     [Header("Stats")] [SerializeField] public float speed;
     [Range(-1, 1)] [SerializeField] private float horInput;
     [Range(-1, 1)] [SerializeField] private float verInput;
     [SerializeField] private bool lockOn;
 
-    [Header("References")] [SerializeField] 
+    [Header("References")] [SerializeField]
     private CharacterController characterController;
 
     [SerializeField] private Camera camera;
@@ -17,19 +18,22 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private AnimatorManager animatorManager;
 
 
-    private void Start() {
+    private void Start()
+    {
         setUpReferences();
-        movement = new GroundMovement(transform, characterController, camera, animatorManager ,speed);
+        movement = new GroundMovement(transform, characterController, camera, animatorManager, speed);
     }
 
-    private void setUpReferences() {
+    private void setUpReferences()
+    {
         characterController = GetComponent<CharacterController>();
         animatorManager = GetComponentInChildren<AnimatorManager>();
         camera = Camera.main;
     }
 
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         Vector2 input = InputManager.instance.getAxisInputs();
         movement.setInputs(input);
         movement.movement();
@@ -37,7 +41,8 @@ public class PlayerMovement : MonoBehaviour {
         setInputs(input);
     }
 
-    private void setInputs(Vector2 inputs) {
+    private void setInputs(Vector2 inputs)
+    {
         horInput = inputs.x;
         verInput = inputs.y;
     }
