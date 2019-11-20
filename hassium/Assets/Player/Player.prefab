@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a9dc760d483200499f7e2feba19689b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 4
   horInput: 0
   verInput: 0
   lockOn: 0
@@ -65,7 +65,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.62
+  m_Height: 1.5
   m_Radius: 0.31
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -246,6 +246,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mesh
       objectReference: {fileID: 0}
+    - target: {fileID: 2135624897131870642, guid: c4254797a3d781d4e8d2abed1da2e807,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cb37ecbde5a6d0c22ab334966c7706a5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4254797a3d781d4e8d2abed1da2e807, type: 3}
 --- !u!1 &9180212918264888200 stripped
