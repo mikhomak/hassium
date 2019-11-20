@@ -36,7 +36,8 @@ public class GroundMovement : AMovement {
         if (minSpeedToMove > allowPlayerRotation) {
             moveAndRotate();
         }
-        else if (minSpeedToMove < allowPlayerRotation) {
+        else {
+            repeatDirection = false;
         }
     }
 
@@ -51,6 +52,9 @@ public class GroundMovement : AMovement {
         if (verInput > 0) {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection),
                 desiredRotationSpeed);
+        }
+
+        if (Math.Abs(horInput) < Constants.TOLERANCE && Math.Abs(verInput) < Constants.TOLERANCE) {
         }
 
         characterController.Move(speed * Time.deltaTime * desiredMoveDirection);
@@ -68,6 +72,7 @@ public class GroundMovement : AMovement {
                 repeatDirection = true;
                 oldForwardDirectionVector = forward;
                 oldRightDirectionVector = right;
+                transform.rotation = repeatingDirectionRotation(forward, right);
             }
             else {
                 animatorManager.lockHeadRotation();
@@ -75,10 +80,19 @@ public class GroundMovement : AMovement {
             }
         }
 
-        if (Math.Abs(horInput) < Constants.TOLERANCE && Math.Abs(verInput) < Constants.TOLERANCE) {
-            repeatDirection = false;
-        }
 
         return direction;
+    }
+
+    private Quaternion repeatingDirectionRotation(Vector3 forward, Vector3 right) {
+        Vector3 directionToLook;
+        if (verInput < 0) {
+            directionToLook = -1 * verInput * forward + right * horInput;
+        }
+        else {
+            directionToLook = forward + horInput * right;
+        }
+
+        return Quaternion.LookRotation(directionToLook);
     }
 }
