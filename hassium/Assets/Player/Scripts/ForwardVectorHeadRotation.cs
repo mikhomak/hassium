@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Util;
 
 public class ForwardVectorHeadRotation : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class ForwardVectorHeadRotation : MonoBehaviour
         horInput = inputs.x;
         verInput = inputs.y;
 
-        if (verInput > 0 || horInput != 0)
+        if (verInput > 0 || Math.Abs(horInput) > Constants.TOLERANCE)
         {
             if (repeatedDirection == false)
             {

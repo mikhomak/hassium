@@ -5,8 +5,8 @@ namespace Player.Scripts {
         protected float horInput, verInput;
         protected float speed;
         protected bool lockOn = true;
-        protected float allowPlayerRotation = 0.1f;
-        protected float desiredRotationSpeed = 0.1f;
+        protected readonly float allowPlayerRotation = 0.1f;
+        protected readonly float desiredRotationSpeed = 0.1f;
 
         /* References */
         protected CharacterController characterController;
