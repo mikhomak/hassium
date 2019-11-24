@@ -22,8 +22,10 @@
         <e p="Util" t="Include">
           <e p="AnimatorManager.cs" t="Include" />
           <e p="Constants.cs" t="Include" />
+          <e p="HitBox.cs" t="Include" />
+          <e p="HurtBox.cs" t="Include" />
+          <e p="IHitBox.cs" t="Include" />
         </e>
-        <e p="testLockOnTarget.cs" t="Include" />
       </e>
       <e p="Temp/bin" t="ExcludeRecursive" />
       <e p="hassium.sln" t="IncludeFlat" />
