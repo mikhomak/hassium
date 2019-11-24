@@ -4,7 +4,7 @@ namespace Util {
         
         public const float TOLERANCE = 0.01f;
 
-        public const int HITBOX_LAYER = 13;
+        public const int HITBOX_LAYER = 12;
 
 
     }
