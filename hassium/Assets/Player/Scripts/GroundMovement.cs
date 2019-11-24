@@ -34,7 +34,10 @@ public class GroundMovement : AMovement {
     }
 
     private void lockOnMovement() {
-        
+        Vector3 targetRotation = transform.position - lockOnTargetPosition.position;
+        targetRotation.Normalize();
+        targetRotation.y = 0f;
+        transform.rotation = Quaternion.LookRotation(targetRotation);
     }
 
     private void normalMovement() {

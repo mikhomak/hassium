@@ -23,6 +23,7 @@
           <e p="AnimatorManager.cs" t="Include" />
           <e p="Constants.cs" t="Include" />
         </e>
+        <e p="testLockOnTarget.cs" t="Include" />
       </e>
       <e p="Temp/bin" t="ExcludeRecursive" />
       <e p="hassium.sln" t="IncludeFlat" />
